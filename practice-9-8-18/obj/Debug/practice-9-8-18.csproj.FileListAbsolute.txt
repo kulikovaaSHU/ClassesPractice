@@ -1,0 +1,6 @@
+c:\users\anastasia\documents\visual studio 2017\Projects\practice-9-8-18\practice-9-8-18\bin\Debug\practice-9-8-18.exe.config
+c:\users\anastasia\documents\visual studio 2017\Projects\practice-9-8-18\practice-9-8-18\bin\Debug\practice-9-8-18.exe
+c:\users\anastasia\documents\visual studio 2017\Projects\practice-9-8-18\practice-9-8-18\bin\Debug\practice-9-8-18.pdb
+c:\users\anastasia\documents\visual studio 2017\Projects\practice-9-8-18\practice-9-8-18\obj\Debug\practice-9-8-18.csprojResolveAssemblyReference.cache
+c:\users\anastasia\documents\visual studio 2017\Projects\practice-9-8-18\practice-9-8-18\obj\Debug\practice-9-8-18.exe
+c:\users\anastasia\documents\visual studio 2017\Projects\practice-9-8-18\practice-9-8-18\obj\Debug\practice-9-8-18.pdb
