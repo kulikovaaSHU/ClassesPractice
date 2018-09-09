@@ -8,23 +8,30 @@ namespace practice_9_8_18
 {
     class Program
     {
+        private static readonly Random random = new Random();
+        private static readonly object syncLock = new object();
+
         static int roll_dice(int min, int max)
         {
-            Random random = new Random();
-            int roll = random.Next(min, max + 1);
-            return roll;
+            lock (syncLock)
+            {
+                int roll = random.Next(min, max + 1);
+                return roll;
+            }
         }
 
         static double roll_dice_double()
         {
-            Random random = new Random();
-            double roll = random.NextDouble()*10 + 10.00;
-            return roll;
+            lock (syncLock)
+            {
+                double roll = random.NextDouble() * 10 + 10.00;
+                return roll;
+            }
         }
 
         static string random_first_name()
         {
-            string[] names = { "John", "Jerry", "Greg", "Anna", "Liza", "Pamela", "Peter", "Selene", "Jackie", "Robert", "Shea", "Shilla", "Riley", "Kelly", "Kurt", "Neil" };
+            string[] names = { "John", "Jerry", "Greg", "Anna", "Liza", "Pamela", "Peter", "Selene", "Jackie", "Robert", "Shea", "Shillah", "Riley", "Kelly", "Kurt", "Neil" };
             string newname = names[roll_dice(0, names.Length-1)];
             return newname;
         }
@@ -34,6 +41,34 @@ namespace practice_9_8_18
             string[] names = { "Goldberg","Johanson","Greene","Smith","McDouglas","Peters","VanFonDiesel","Freeman","Parker","Prince","Sailer"};
             string newname = names[roll_dice(0, names.Length-1)];
             return newname;
+        }
+
+        static string random_position()
+        {
+            string[] position = { "Sales Clerk","Floor Manager","Administrative Assistant","Janitor","Administrator","IT support","CEO","CFO","CISO","Vice President","President","Stockroom Manager", "Accountant","Associate Accountant","General Manager","Tech Support Assistant","Consultant","Financial Advisor","Benefits Manager","Shift Leader"};
+            string newposition = position[roll_dice(0, position.Length - 1)];
+            return newposition;
+        }
+
+        static string random_jobType()
+        {
+            string[] jobType = { "Part-time","Full-time","Contractor","Temporary","Internship"};
+            string newJobType = jobType[roll_dice(0, jobType.Length - 1)];
+            return newJobType;
+        }
+
+        static string random_level()
+        {
+            string[] levels = { "Level 1","Level 2","Level 3","Executive","Associate","Entry-level"};
+            string newLevel = levels[roll_dice(0, levels.Length - 1)];
+            return newLevel;
+        }
+
+        static string random_department()
+        {
+            string[] department = { "Store","HR","Sales","IT","Accounting","Marketing","Executive","Customer Support"};
+            string newDept = department[roll_dice(0, department.Length - 1)];
+            return newDept;
         }
 
         static Employee create_employee()
@@ -48,11 +83,11 @@ namespace practice_9_8_18
             newEmployee.city = "City";
             newEmployee.state = "ST";
             newEmployee.zipcode = "01234";
-            newEmployee.position = "Sales Clerk";
-            newEmployee.jobType = "Part-time";
-            newEmployee.level = "Level 1";
+            newEmployee.position = random_position();
+            newEmployee.jobType = random_jobType();
+            newEmployee.level = random_level();
             newEmployee.location = "City, ST";
-            newEmployee.department = "Store";
+            newEmployee.department = random_department();
             newEmployee.yearStarted = roll_dice(2010, 2018);
             newEmployee.salaried = false;
             newEmployee.rate = Math.Round(roll_dice_double(), 2);
@@ -87,7 +122,7 @@ namespace practice_9_8_18
             Console.WriteLine("Date of Birth:       " + employee.birthDay + "." + employee.birthMonth + "." + employee.birthYear);
             Console.WriteLine("Residence:           " + employee.address + ", " + employee.city + ", " + employee.state + " " + employee.zipcode);
             Console.WriteLine("Position:            " + employee.position + " " + employee.level + " (" + employee.jobType + "), started in " + employee.yearStarted);
-            Console.WriteLine("Location:            " + employee.location);
+            Console.WriteLine("Location:            " + employee.location + ", department - " + employee.department);
 
             if(employee.salaried)
             {
@@ -121,17 +156,21 @@ namespace practice_9_8_18
         {
             int i;
 
-            for (i = 0; i < 10; i++)
+            Console.WriteLine("Employees:\n");
+
+            for (i = 0; i < 5; i++)
             {
                 output_info_employee(create_employee());
                 Console.WriteLine("\n");
             }
 
+            Console.WriteLine("\nCustomers:\n");
 
-
-
-
-            output_info_customer(create_customer());
+            for (i = 0; i < 5; i++)
+            {
+                output_info_customer(create_customer());
+                Console.WriteLine("\n");
+            }
 
             Console.ReadLine();
         }
